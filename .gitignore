@@ -1,0 +1,15 @@
+# Secrets
+.env
+.env.*
+*.secret
+secrets.*
+
+# macOS
+.DS_Store
+
+# Screenshots / local exports
+screenshots/private/
+exports/private/
+
+# Shortcuts exports that may contain personal data
+*.shortcut
