@@ -20,6 +20,26 @@ You need:
 
 If you do not know the SKU or device ID, follow [`get-device-info.md`](get-device-info.md).
 
+## Fast setup: import the template
+
+Import the public sanitized template:
+
+[**Add Govee-Lampe-Toggle-v1**](https://www.icloud.com/shortcuts/8e6b064997884d5c97ebe91375867aa1)
+
+After importing, open the shortcut and replace all placeholders:
+
+```text
+YOUR_GOVEE_API_KEY
+YOUR_SKU
+YOUR_DEVICE_ID
+```
+
+Then run the shortcut once from the Shortcuts app. If it works, add it to the Lock Screen.
+
+## Manual setup
+
+Use the following steps if you prefer to build the shortcut yourself.
+
 ## Placeholder values
 
 Replace these placeholders everywhere in the shortcut:
