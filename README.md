@@ -1,40 +1,36 @@
 # Govee iPhone Shortcut
 
-Unofficial iPhone Shortcut template to toggle Govee lights from the iPhone Lock Screen, Action Button, Back Tap, widgets, or the Shortcuts app.
+[![Status](https://img.shields.io/badge/status-community%20template-blue)](#)
+[![Platform](https://img.shields.io/badge/platform-iPhone%20Shortcuts-lightgrey)](#)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-This project is intentionally simple: it uses the Govee Open API directly from Apple Shortcuts. No server, no extra app, no shared API key.
+A small **unofficial Apple Shortcuts template** for toggling compatible Govee lights from an iPhone.
 
-> This project is not affiliated with, endorsed by, or sponsored by Govee.
+It is built for one simple use case:
 
-## What it does
+> Wake iPhone → tap one Lock Screen button → toggle the light on or off.
 
-- Toggles a Govee light on or off
-- Works from iPhone Shortcuts
-- Can be placed on the iPhone Lock Screen
-- Uses the user's own Govee API key
-- Supports the Govee Open API `powerSwitch` capability
-- Tested with the Govee H607C Floor Lamp 2
+No custom app. No server. No shared API key. The shortcut calls the Govee Open API directly from Apple Shortcuts.
 
-## Quick start
+> [!IMPORTANT]
+> This project is **not affiliated with, endorsed by, sponsored by, or maintained by Govee**. Govee is a trademark of its respective owner. This repository is a community template only.
 
-1. Get your own Govee API key.
-2. Find your device `sku` and `device` ID.
-3. Build the shortcut using the steps in [`docs/setup.md`](docs/setup.md).
-4. Add the shortcut to your Lock Screen or Action Button.
+## What it can do
 
-## Required values
+- Toggle a Govee light on/off with one shortcut
+- Run from the Shortcuts app
+- Run from the iPhone Lock Screen
+- Run from the Action Button, Back Tap, Siri, or widgets
+- Use each user's own Govee API key
+- Work with devices that expose `devices.capabilities.on_off` / `powerSwitch`
 
-You need three values:
+## Tested device
 
-| Value | Example | Notes |
-|---|---|---|
-| `Govee-API-Key` | `your-api-key-here` | Never publish this. |
-| `sku` | `H607C` | Your Govee product model. |
-| `device` | `AA:BB:CC:DD:EE:FF:00:11` | Your device identifier from the Govee API. |
+| Device | SKU | Status |
+|---|---:|---|
+| Govee Floor Lamp 2 | `H607C` | Tested |
 
-## Supported devices
-
-This template should work with Govee devices that expose this capability:
+Other Govee lights may work if their Govee API response contains this capability:
 
 ```json
 {
@@ -43,28 +39,93 @@ This template should work with Govee devices that expose this capability:
 }
 ```
 
-It was created and tested with:
+## Quick start
 
-- Govee Floor Lamp 2 / H607C
+1. Get your own Govee API key.
+2. Find your device `sku` and `device` ID.
+3. Import or build the shortcut.
+4. Replace the placeholder values.
+5. Add it to the iPhone Lock Screen.
 
-Other Govee lights may work by changing `sku` and `device`.
+Full guide: [`docs/setup.md`](docs/setup.md)
+
+## Shortcut template link
+
+A public iCloud Shortcut template should only be published after it has been sanitized.
+
+A safe public template must contain placeholders only:
+
+```text
+YOUR_GOVEE_API_KEY
+YOUR_SKU
+YOUR_DEVICE_ID
+```
+
+Do **not** publish an iCloud Shortcut link that contains a real API key or real device ID.
+
+Sanitizing checklist: [`docs/publishing.md`](docs/publishing.md)
+
+## Required values
+
+| Value | Example | Notes |
+|---|---|---|
+| `Govee-API-Key` | `YOUR_GOVEE_API_KEY` | Personal secret. Never publish. |
+| `sku` | `H607C` | Product model from the Govee API. |
+| `device` | `AA:BB:CC:DD:EE:FF:00:11` | Device identifier from the Govee API. Treat as private. |
+
+How to get them: [`docs/get-device-info.md`](docs/get-device-info.md)
+
+## How it works
+
+The shortcut performs two API calls:
+
+1. `device/state` — read the current `powerSwitch` value.
+2. `device/control` — send the opposite value.
+
+Toggle logic:
+
+```text
+current value 1 → send 0
+current value 0 → send 1
+```
+
+Request examples: [`examples/request-bodies.md`](examples/request-bodies.md)
 
 ## Repository contents
 
-- [`docs/setup.md`](docs/setup.md) — step-by-step iPhone Shortcut setup
-- [`docs/get-device-info.md`](docs/get-device-info.md) — how to find your SKU and device ID
-- [`docs/troubleshooting.md`](docs/troubleshooting.md) — common problems and fixes
-- [`examples/request-bodies.md`](examples/request-bodies.md) — reusable API request templates
+```text
+docs/
+  setup.md             Step-by-step shortcut setup
+  get-device-info.md   How to find SKU and device ID
+  publishing.md        How to publish a safe iCloud template
+  troubleshooting.md   Common errors and fixes
 
-## Safety
+examples/
+  request-bodies.md    Reusable Govee API request bodies
+```
 
-Do not commit or share:
+## Security
+
+Never commit or share:
 
 - your Govee API key
 - your real device ID
 - screenshots containing secrets
+- an exported shortcut that still contains personal values
 
-If you accidentally expose your API key, revoke or regenerate it in your Govee account.
+If you accidentally share a shortcut containing your API key, regenerate the key before publishing anything else.
+
+See [`SECURITY.md`](SECURITY.md).
+
+## Roadmap
+
+Possible future improvements:
+
+- sanitized iCloud Shortcut template link
+- setup screenshots
+- multiple lamp support
+- separate shortcuts for brightness/color
+- compatibility table for more Govee models
 
 ## License
 
