@@ -2,25 +2,27 @@
 
 This guide creates one iPhone Shortcut named **Govee Toggle**.
 
-The shortcut checks the current power state of the light and then sends the opposite value:
+The shortcut checks the current power state and sends the opposite value:
 
-- current value `1` → send `0`
-- current value `0` → send `1`
+```text
+current value 1 → send 0
+current value 0 → send 1
+```
 
 ## Before you start
 
 You need:
 
-- an iPhone with Apple Shortcuts
-- your Govee API key
-- your Govee `sku`
+- an iPhone with the Shortcuts app
+- your personal Govee API key
+- your Govee device `sku`
 - your Govee `device` ID
 
-See [`get-device-info.md`](get-device-info.md) if you do not know the SKU or device ID.
+If you do not know the SKU or device ID, follow [`get-device-info.md`](get-device-info.md).
 
 ## Placeholder values
 
-Replace these values in the steps below:
+Replace these placeholders everywhere in the shortcut:
 
 ```text
 YOUR_GOVEE_API_KEY
@@ -28,17 +30,14 @@ YOUR_SKU
 YOUR_DEVICE_ID
 ```
 
-Example SKU:
+Example values:
 
 ```text
-H607C
+sku    = H607C
+device = AA:BB:CC:DD:EE:FF:00:11
 ```
 
-Example device ID format:
-
-```text
-AA:BB:CC:DD:EE:FF:00:11
-```
+Do not publish your real API key or device ID.
 
 ## Shortcut structure
 
@@ -48,7 +47,7 @@ Create a new shortcut and name it:
 Govee Toggle
 ```
 
-### 1. Store API key
+## 1. Store the API key
 
 Add action: **Text**
 
@@ -62,7 +61,7 @@ Add action: **Set Variable**
 Set variable APIKey to Text
 ```
 
-### 2. Build state request body
+## 2. Build the state request body
 
 Add action: **URL**
 
@@ -88,7 +87,7 @@ Add action: **Set Variable**
 Set variable BodyState to Text
 ```
 
-### 3. Call device/state
+## 3. Call `device/state`
 
 Add action: **Get Contents of URL**
 
@@ -104,7 +103,14 @@ Request Body: File
 File: BodyState
 ```
 
-### 4. Read current power value
+Optional test:
+
+- add **Quick Look** or **Show Result** temporarily
+- run the shortcut
+- check that the response contains `powerSwitch`
+- delete the test output action afterwards
+
+## 4. Read the current power value
 
 Add action: **Get Dictionary Value**
 
@@ -124,9 +130,15 @@ Add action: **Get Item from List**
 Get item at index 2 from Dictionary Value
 ```
 
-For the tested H607C response, index `2` is the `powerSwitch` capability. If your device returns a different order, check the JSON response and use the index where `instance` is `powerSwitch`.
+For the tested H607C response, index `2` is the `powerSwitch` capability.
 
-Add action: **Get Dictionary Value**
+If your device returns a different order, inspect the JSON response and use the list item where:
+
+```json
+"instance": "powerSwitch"
+```
+
+Then add action: **Get Dictionary Value**
 
 ```text
 Get state in Item from List
@@ -144,15 +156,11 @@ Add action: **Set Variable**
 Set variable CurrentPower to Dictionary Value
 ```
 
-### 5. Create opposite value
+## 5. Create the opposite value
 
 Add action: **Text**
 
-```text
-CurrentPower
-```
-
-The content should be the `CurrentPower` variable, not the literal word.
+Insert the `CurrentPower` variable into the text field.
 
 Add action: **Set Variable**
 
@@ -194,7 +202,14 @@ Add action: **Set Variable**
 Set variable NewPower to Text
 ```
 
-### 6. Build control request body
+Result:
+
+```text
+1 → 0
+0 → 1
+```
+
+## 6. Build the control request body
 
 Add action: **Text**
 
@@ -229,7 +244,7 @@ Add action: **Set Variable**
 Set variable BodyControl to Text
 ```
 
-### 7. Call device/control
+## 7. Call `device/control`
 
 Add action: **URL**
 
@@ -264,4 +279,14 @@ Run the shortcut. The light should toggle.
 
 ## Recommended backup
 
-After it works, duplicate the shortcut and keep a backup copy.
+After it works:
+
+1. Duplicate the shortcut.
+2. Rename the copy to **Govee Toggle Backup**.
+3. Keep it private.
+
+## Publishing warning
+
+Do not share your personal working shortcut as an iCloud link if it contains your real API key.
+
+For public sharing, create a sanitized copy first. See [`publishing.md`](publishing.md).
