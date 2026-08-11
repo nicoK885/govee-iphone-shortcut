@@ -4,6 +4,22 @@ Use this checklist before sharing an iCloud Shortcut link publicly.
 
 The goal is to publish a **template**, not your personal working shortcut.
 
+## Current public template
+
+The current sanitized public template is:
+
+[**Add Govee-Lampe-Toggle-v1**](https://www.icloud.com/shortcuts/8e6b064997884d5c97ebe91375867aa1)
+
+It is intended to contain placeholders only:
+
+```text
+YOUR_GOVEE_API_KEY
+YOUR_SKU
+YOUR_DEVICE_ID
+```
+
+Before publishing a new version, repeat the checklist below.
+
 ## Why this matters
 
 When you share an Apple Shortcut, the shared shortcut can include embedded text, URLs, request bodies, variable defaults, and other values. If your API key is stored in a Text action, it can become part of the shared shortcut.
