@@ -1,32 +1,55 @@
 # Security policy
 
-## Secrets
+This repository is a template for Apple Shortcuts. It should never contain real user secrets.
 
-This project must never contain real user secrets.
+## Never commit or publish
 
-Do not commit:
+Do not commit, upload, or share:
 
 - Govee API keys
-- real device IDs
-- screenshots containing API keys
-- exported shortcut files that contain personal values
+- real Govee device IDs
+- screenshots containing API keys or device IDs
+- exported `.shortcut` files that contain personal values
+- public iCloud Shortcut links that contain personal values
 
-## Reporting a secret leak
+Use placeholders instead:
 
-If you find a leaked API key or real device ID in this repository:
+```text
+YOUR_GOVEE_API_KEY
+YOUR_SKU
+YOUR_DEVICE_ID
+```
+
+## If a secret is leaked
+
+If you accidentally expose a Govee API key:
+
+1. Revoke or regenerate the key in your Govee account.
+2. Replace the key inside your private shortcut.
+3. Remove the exposed key from Git history, issues, screenshots, and iCloud Shortcut links where possible.
+4. Publish only a sanitized replacement.
+
+## Reporting a leak in this repository
+
+If you find a leaked secret here:
 
 1. Open a GitHub issue without repeating the secret.
 2. Mention only the file path and line number.
-3. The owner should remove the secret and rotate the affected key.
+3. The maintainer should remove the secret and rotate the affected key.
 
-## For users
+## Privacy model
 
-If you accidentally shared your Govee API key:
+This project:
 
-1. Revoke or regenerate it in your Govee account.
-2. Replace it inside the iPhone Shortcut.
-3. Remove screenshots or exports that contained the old key.
+- does not run a server
+- does not collect telemetry
+- does not store user data
+- does not proxy Govee API requests
 
-## Scope
+The shortcut runs locally on the user's device and sends requests directly to the Govee Open API.
 
-This is an unofficial template for Apple Shortcuts. It does not run a server and does not collect user data.
+## Public shortcut links
+
+Before publishing an iCloud Shortcut link, follow [`docs/publishing.md`](docs/publishing.md).
+
+A public link should be treated as public software distribution, not as a private backup.
