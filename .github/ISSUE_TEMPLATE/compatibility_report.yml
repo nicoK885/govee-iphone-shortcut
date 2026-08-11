@@ -1,0 +1,52 @@
+name: Compatibility report
+description: Share whether the shortcut works with another Govee device
+title: "Compatibility: "
+labels: [compatibility]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to help build a compatibility table.
+
+        Do not paste your API key or real device ID.
+  - type: input
+    id: sku
+    attributes:
+      label: SKU
+      description: Govee product model, for example H607C.
+      placeholder: H607C
+    validations:
+      required: true
+  - type: input
+    id: device_name
+    attributes:
+      label: Device name
+      description: Public product name, not your personal room name.
+      placeholder: Govee Floor Lamp 2
+    validations:
+      required: false
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result
+      options:
+        - Works
+        - Partially works
+        - Does not work
+    validations:
+      required: true
+  - type: textarea
+    id: capability
+    attributes:
+      label: powerSwitch capability
+      description: Paste only the redacted capability block if available. Remove personal values.
+      render: json
+    validations:
+      required: false
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Any setup notes, index value, or iOS version details.
+    validations:
+      required: false
