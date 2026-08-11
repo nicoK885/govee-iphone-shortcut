@@ -1,0 +1,53 @@
+name: Bug report
+description: Report a problem with the shortcut or docs
+title: "Bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug.
+
+        Do not paste your Govee API key or real device ID.
+  - type: input
+    id: device
+    attributes:
+      label: Govee device model / SKU
+      description: Example H607C. Do not include your device ID.
+      placeholder: H607C
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Problem area
+      options:
+        - Shortcut setup
+        - API key / authentication
+        - Device state request
+        - Device control request
+        - Lock Screen / iOS integration
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the issue. Remove secrets before pasting logs or screenshots.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: false
+  - type: textarea
+    id: redacted_response
+    attributes:
+      label: Redacted API response or screenshot
+      description: Optional. Remove API keys, device IDs, and personal details.
+    validations:
+      required: false
