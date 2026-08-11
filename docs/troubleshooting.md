@@ -1,8 +1,12 @@
 # Troubleshooting
 
-## The shortcut says a parameter is missing
+Common problems when building or running the shortcut.
 
-This usually means an **If** action has an empty second condition.
+## Shortcut says a parameter is missing
+
+Likely cause:
+
+- an **If** action contains an empty second condition
 
 Fix:
 
@@ -11,7 +15,27 @@ Fix:
 3. Remove only the empty condition row.
 4. Do not delete the whole If block.
 
-## The shortcut returns code 401
+## The `If` action does not offer `is`
+
+Likely cause:
+
+- Shortcuts treats the value as a dictionary/object instead of text
+
+Fix:
+
+1. Add a **Text** action.
+2. Put the variable into that Text action.
+3. Set a new variable from the Text action.
+4. Use the new text variable in the **If** condition.
+
+Example:
+
+```text
+CurrentPower → Text → CurrentPowerText
+If CurrentPowerText is 1
+```
+
+## Shortcut returns code 401
 
 Likely cause:
 
@@ -28,14 +52,15 @@ Fix:
 Govee-API-Key
 ```
 
-## The shortcut returns code 400
+## Shortcut returns code 400
 
 Likely cause:
 
 - wrong JSON body
 - wrong `sku`
 - wrong `device` ID
-- `NewPower` inserted as text in the wrong place
+- `NewPower` inserted as literal text
+- missing `Content-Type: application/json`
 
 The control body should contain:
 
@@ -61,7 +86,7 @@ and not:
 "value": "NewPower"
 ```
 
-## The shortcut runs but does not toggle
+## Shortcut runs but does not toggle
 
 Check whether the state response contains:
 
@@ -79,9 +104,11 @@ If `powerSwitch` is not the second capability in your response, change the **Get
 
 For the tested H607C response, `powerSwitch` was at index `2`.
 
-## The shortcut shows the number 0 or 1 at the end
+## Shortcut shows the number 0 or 1 at the end
 
-You probably still have a temporary test output action.
+Likely cause:
+
+- a temporary test output action is still present
 
 Remove actions like:
 
@@ -89,15 +116,30 @@ Remove actions like:
 - Show Result
 - Show Alert
 
-## The API works in testing but not from Lock Screen
+## API works in testing but not from Lock Screen
 
 Try:
 
-- unlock the iPhone once and run it from the Shortcuts app
+- run the shortcut once from the Shortcuts app
+- approve any permission prompts
 - then run it from the Lock Screen again
-- check that mobile data or Wi-Fi is available
-- avoid Focus modes that block Shortcut execution
+- check Wi-Fi or mobile data
+- check whether a Focus mode blocks Shortcuts prompts
+
+## Device is offline
+
+Check:
+
+- device is powered on
+- device is connected in the Govee app
+- API key belongs to the same Govee account
+- device appears in the `user/devices` response
 
 ## I exposed my API key
 
-Regenerate or revoke the key in your Govee account and replace it in the shortcut.
+Immediately:
+
+1. Revoke or regenerate the key in your Govee account.
+2. Replace it inside your private iPhone Shortcut.
+3. Delete or replace screenshots that contained the key.
+4. If you shared an iCloud Shortcut link containing the key, stop using that link and publish a sanitized copy instead.
