@@ -41,19 +41,21 @@ Other Govee lights may work if their Govee API response contains this capability
 
 ## Quick start
 
-1. Get your own Govee API key.
-2. Find your device `sku` and `device` ID.
-3. Import or build the shortcut.
-4. Replace the placeholder values.
+1. Import the shortcut template.
+2. Get your own Govee API key.
+3. Find your device `sku` and `device` ID.
+4. Replace the placeholder values inside the shortcut.
 5. Add it to the iPhone Lock Screen.
 
 Full guide: [`docs/setup.md`](docs/setup.md)
 
-## Shortcut template link
+## Import the shortcut
 
-A public iCloud Shortcut template should only be published after it has been sanitized.
+Import the sanitized public template:
 
-A safe public template must contain placeholders only:
+[**Add Govee-Lampe-Toggle-v1**](https://www.icloud.com/shortcuts/8e6b064997884d5c97ebe91375867aa1)
+
+After importing, replace the placeholders inside the shortcut:
 
 ```text
 YOUR_GOVEE_API_KEY
@@ -121,7 +123,6 @@ See [`SECURITY.md`](SECURITY.md).
 
 Possible future improvements:
 
-- sanitized iCloud Shortcut template link
 - setup screenshots
 - multiple lamp support
 - separate shortcuts for brightness/color
