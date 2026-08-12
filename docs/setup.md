@@ -9,6 +9,8 @@ current value 1 → send 0
 current value 0 → send 1
 ```
 
+> Prefer pictures? Open the [visual walkthrough](screenshots.md).
+
 ## Before you start
 
 You need:
@@ -24,7 +26,7 @@ If you do not know the SKU or device ID, follow [`get-device-info.md`](get-devic
 
 Import the public sanitized template:
 
-[**Add Govee-Lampe-Toggle-v1**](https://www.icloud.com/shortcuts/8e6b064997884d5c97ebe91375867aa1)
+[**Add Govee-Lampe-Toggle-v1 →**](https://www.icloud.com/shortcuts/8e6b064997884d5c97ebe91375867aa1)
 
 After importing, open the shortcut and replace all placeholders:
 
@@ -35,6 +37,12 @@ YOUR_DEVICE_ID
 ```
 
 Then run the shortcut once from the Shortcuts app. If it works, add it to the Lock Screen.
+
+<p align="center">
+  <a href="screenshots.md">
+    <img src="images/shortcut-walkthrough-preview.jpg" alt="Shortcut walkthrough preview" width="720">
+  </a>
+</p>
 
 ## Manual setup
 
@@ -81,6 +89,8 @@ Add action: **Set Variable**
 Set variable APIKey to Text
 ```
 
+Visual reference: [Screenshot 1](images/01-api-key-and-state-url.jpg)
+
 ## 2. Build the state request body
 
 Add action: **URL**
@@ -107,6 +117,8 @@ Add action: **Set Variable**
 Set variable BodyState to Text
 ```
 
+Visual references: [Screenshot 1](images/01-api-key-and-state-url.jpg) · [Screenshot 2](images/02-state-body-and-call.jpg)
+
 ## 3. Call `device/state`
 
 Add action: **Get Contents of URL**
@@ -129,6 +141,8 @@ Optional test:
 - run the shortcut
 - check that the response contains `powerSwitch`
 - delete the test output action afterwards
+
+Visual reference: [Screenshot 2](images/02-state-body-and-call.jpg)
 
 ## 4. Read the current power value
 
@@ -175,6 +189,8 @@ Add action: **Set Variable**
 ```text
 Set variable CurrentPower to Dictionary Value
 ```
+
+Visual references: [Screenshot 3](images/03-state-payload-list.jpg) · [Screenshot 4](images/04-read-state-value.jpg) · [Screenshot 5](images/05-save-current-power.jpg)
 
 ## 5. Create the opposite value
 
@@ -229,6 +245,8 @@ Result:
 0 → 1
 ```
 
+Visual references: [Screenshot 6](images/06-current-power-text-if.jpg) · [Screenshot 7](images/07-new-power-if-otherwise.jpg) · [Screenshot 8](images/08-otherwise-and-control-body.jpg)
+
 ## 6. Build the control request body
 
 Add action: **Text**
@@ -263,6 +281,8 @@ Add action: **Set Variable**
 ```text
 Set variable BodyControl to Text
 ```
+
+Visual references: [Screenshot 9](images/09-control-body-start.jpg) · [Screenshot 10](images/10-control-body-newpower.jpg)
 
 ## 7. Call `device/control`
 
