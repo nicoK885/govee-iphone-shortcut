@@ -89,7 +89,30 @@ The important capability is:
 
 ---
 
-## 5. Run and test
+## 5. Send the control request
+
+<p align="center">
+  <img src="images/11-control-request.svg" width="360" alt="BodyControl variable, device control URL, and final Get Contents of URL action">
+</p>
+
+After saving the JSON as `BodyControl`:
+
+1. Add the control endpoint:
+
+```text
+https://openapi.api.govee.com/router/api/v1/device/control
+```
+
+2. Add **Get Contents of URL**.
+3. Use `POST`.
+4. Send the same API headers as the state request.
+5. Use `BodyControl` as the request body.
+
+This is the final action that sends `NewPower` to the lamp.
+
+---
+
+## 6. Run and test
 
 Run the shortcut once from the Shortcuts app.
 
