@@ -306,6 +306,8 @@ Request Body: File
 File: BodyControl
 ```
 
+Visual reference: [Screenshot 11](images/11-control-request.svg)
+
 Run the shortcut. The light should toggle.
 
 ## Add it to the Lock Screen
